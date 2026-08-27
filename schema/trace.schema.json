@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/loootte/agent-distillation-bench/schema/trace.schema.json",
+  "title": "Agent distillation trace step",
+  "description": "One JSONL line. Required fields match RFC-0001 / issue #1.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "task_id",
+    "step",
+    "observation",
+    "action",
+    "tool",
+    "args",
+    "success"
+  ],
+  "properties": {
+    "task_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Task instance id, e.g. close_ticket:T-101."
+    },
+    "episode_id": {
+      "type": "string",
+      "description": "Optional grouping key for one explore run."
+    },
+    "task_family": {
+      "type": "string",
+      "description": "Optional family key used by the store, e.g. close_ticket."
+    },
+    "step": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "observation": {
+      "type": "object",
+      "description": "Environment snapshot before the action."
+    },
+    "action": {
+      "type": "string",
+      "description": "Human-readable action label; often equals tool."
+    },
+    "tool": {
+      "type": ["string", "null"],
+      "description": "Tool / API name. Null for no-op or finish."
+    },
+    "args": {
+      "type": "object"
+    },
+    "success": {
+      "type": "boolean",
+      "description": "Whether this step's tool call succeeded, not whether the task is done."
+    },
+    "error": {
+      "type": ["string", "null"]
+    }
+  }
+}

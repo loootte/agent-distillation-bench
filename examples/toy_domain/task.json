@@ -1,0 +1,13 @@
+{
+  "task_family": "close_ticket",
+  "description": "Add a resolution comment and close the ticket.",
+  "params": {
+    "ticket_id": "string",
+    "resolution": "string"
+  },
+  "initial_state": {
+    "ticket.status": "open",
+    "ticket.comments": []
+  },
+  "success_predicate": "ticket.status == closed AND some comment contains resolution"
+}
